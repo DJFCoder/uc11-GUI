@@ -1,6 +1,6 @@
 package br.com.senac.leiloestdsat.view;
 
-import br.com.senac.leiloestdsat.dao.ProdutosDTO;
+import br.com.senac.leiloestdsat.dto.ProdutosDTO;
 import br.com.senac.leiloestdsat.dao.ProdutosDAO;
 
 /**
@@ -8,7 +8,6 @@ import br.com.senac.leiloestdsat.dao.ProdutosDAO;
  * @author Adm
  */
 public class cadastroVIEW extends javax.swing.JFrame {
-
     public cadastroVIEW() {
         initComponents();
     }
@@ -127,8 +126,7 @@ public class cadastroVIEW extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cadastroNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastroNomeActionPerformed
-        
-        
+
     }//GEN-LAST:event_cadastroNomeActionPerformed
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
@@ -139,14 +137,13 @@ public class cadastroVIEW extends javax.swing.JFrame {
         produto.setNome(nome);
         produto.setValor(Integer.valueOf(valor));
         produto.setStatus(status);
-        
         ProdutosDAO produtodao = new ProdutosDAO();
         produtodao.cadastrarProduto(produto);
-        
+
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void btnProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProdutosActionPerformed
-        listagemVIEW listagem = new listagemVIEW(); 
+        listagemVIEW listagem = new listagemVIEW();
         listagem.setVisible(true);
     }//GEN-LAST:event_btnProdutosActionPerformed
 
