@@ -1,4 +1,7 @@
+package br.com.senac.leiloestdsat.view;
 
+import br.com.senac.leiloestdsat.dao.ProdutosDTO;
+import br.com.senac.leiloestdsat.dao.ProdutosDAO;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
