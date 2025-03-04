@@ -49,6 +49,30 @@ public class ProdutosDAO {
     }
 
     public ArrayList<ProdutosDTO> listarProdutos() {
+        listagem.clear();
+        conn = null;
+        try {
+            conn = conectaDAO.connectDB();
+            prep = conn.prepareStatement("SELECT * FROM produtos");
+            resultset = prep.executeQuery();
+            while (resultset.next()) {
+                ProdutosDTO prod = new ProdutosDTO();
+                prod.setId(resultset.getInt("id"));
+                prod.setNome(resultset.getString("nome"));
+                prod.setValor(resultset.getInt("valor"));
+                prod.setStatus(resultset.getString("status"));
+                listagem.add(prod);
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(
+                    null,
+                    "CONNECTION ERROR: " + e.getMessage(),
+                    "ERRO",
+                    JOptionPane.WARNING_MESSAGE);
+            return new ArrayList<>();
+        } finally {
+            conectaDAO.discConnectDB();
+        }
         return listagem;
     }
 }

@@ -2,6 +2,7 @@ package br.com.senac.leiloestdsat.view;
 
 import br.com.senac.leiloestdsat.dto.ProdutosDTO;
 import br.com.senac.leiloestdsat.dao.ProdutosDAO;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -142,8 +143,8 @@ public class cadastroVIEW extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void btnProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProdutosActionPerformed
-        listagemVIEW listagem = new listagemVIEW();
-        listagem.setVisible(true);
+        new listagemVIEW().setVisible(true);
+        dispose();
     }//GEN-LAST:event_btnProdutosActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
