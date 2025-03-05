@@ -85,7 +85,8 @@ public class ProdutosDAO {
         String nomeProduto = null;
         try {
             conn = ConectaDAO.connectDB();
-            prep = conn.prepareStatement("SELECT nome FROM produtos WHERE id=?");
+            prep = conn.prepareStatement(
+                    "SELECT nome FROM produtos WHERE id = ?");
             prep.setInt(1,
                     produtoId);
             resultset = prep.executeQuery();
@@ -99,7 +100,7 @@ public class ProdutosDAO {
                         JOptionPane.WARNING_MESSAGE);
             }
             prep = conn.prepareStatement(
-                    "UPDATE produtos SET status=? WHERE id=?");
+                    "UPDATE produtos SET status = ? WHERE id = ?");
             prep.setString(1,
                     "Vendido");
             prep.setInt(2,
@@ -121,5 +122,38 @@ public class ProdutosDAO {
                     prep,
                     resultset);
         }
+    }
+
+    public static ArrayList<ProdutosDTO> listarProdutosVendidos() {
+        listagem.clear();
+        conn = null;
+        try {
+            conn = ConectaDAO.connectDB();
+            prep = conn.prepareStatement(
+                    "SELECT * FROM produtos WHERE status = ?");
+            prep.setString(1,
+                    "Vendido");
+            resultset = prep.executeQuery();
+            while (resultset.next()) {
+                ProdutosDTO prod = new ProdutosDTO();
+                prod.setId(resultset.getInt("id"));
+                prod.setNome(resultset.getString("nome"));
+                prod.setValor(resultset.getInt("valor"));
+                prod.setStatus(resultset.getString("status"));
+                listagem.add(prod);
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(
+                    null,
+                    "CONNECTION ERROR: " + e.getMessage(),
+                    "ERRO",
+                    JOptionPane.WARNING_MESSAGE);
+            return new ArrayList<>();
+        } finally {
+            ConectaDAO.disconnectDB(conn,
+                    prep,
+                    resultset);
+        }
+        return listagem;
     }
 }

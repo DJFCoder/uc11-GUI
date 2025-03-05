@@ -1,5 +1,7 @@
 package br.com.senac.leiloestdsat.dao;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -27,17 +29,17 @@ public class ConectaDAO {
         return conn;
     }
 
-    protected static void disconnectDB() {
+    protected static void disconnectDB(Connection conn, PreparedStatement prep, ResultSet rs) {
         try {
+            if (rs != null) {
+                rs.close();
+            }
+            if (prep != null) {
+                prep.close();
+            }
             if (conn != null && !conn.isClosed()) {
                 conn.close();
             }
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(
-                    null,
-                    "CONNECTION ERROR: " + e.getMessage(),
-                    "ERRO",
-                    JOptionPane.WARNING_MESSAGE);
-        }
+        } catch (SQLException e) {}
     }
 }
