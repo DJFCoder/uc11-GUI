@@ -30,7 +30,7 @@ public class ProdutosDAO {
             prep.setInt(2,
                     produto.getValor());
             prep.setString(3,
-                    produto.getStatus());
+                    "A Venda");
             prep.executeUpdate();
             JOptionPane.showMessageDialog(
                     null,
@@ -40,15 +40,17 @@ public class ProdutosDAO {
         } catch (HeadlessException | SQLException e) {
             JOptionPane.showMessageDialog(
                     null,
-                    "Não foi possível adicionar: " + produto.getNome() + ".\n" + e.getMessage().toUpperCase(),
+                    "NÃO FOI POSSÍVEL ADICIONAR: " + produto.getNome() + ".\n" + e.getMessage().toUpperCase(),
                     "ERRO",
                     JOptionPane.WARNING_MESSAGE);
         } finally {
-            ConectaDAO.disconnectDB();
+            ConectaDAO.disconnectDB(conn,
+                    prep,
+                    resultset);
         }
     }
 
-    public ArrayList<ProdutosDTO> listarProdutos() {
+    public static ArrayList<ProdutosDTO> listarProdutos() {
         listagem.clear();
         conn = null;
         try {
@@ -71,8 +73,53 @@ public class ProdutosDAO {
                     JOptionPane.WARNING_MESSAGE);
             return new ArrayList<>();
         } finally {
-            ConectaDAO.disconnectDB();
+            ConectaDAO.disconnectDB(conn,
+                    prep,
+                    resultset);
         }
         return listagem;
+    }
+
+    public static void venderProduto(int produtoId) {
+        conn = null;
+        String nomeProduto = null;
+        try {
+            conn = ConectaDAO.connectDB();
+            prep = conn.prepareStatement("SELECT nome FROM produtos WHERE id=?");
+            prep.setInt(1,
+                    produtoId);
+            resultset = prep.executeQuery();
+            if (resultset.next()) {
+                nomeProduto = resultset.getString("nome");
+            } else {
+                JOptionPane.showMessageDialog(
+                        null,
+                        "PRODUTO NÃO ENCONTRADO.",
+                        "ERRO",
+                        JOptionPane.WARNING_MESSAGE);
+            }
+            prep = conn.prepareStatement(
+                    "UPDATE produtos SET status=? WHERE id=?");
+            prep.setString(1,
+                    "Vendido");
+            prep.setInt(2,
+                    produtoId);
+            prep.executeUpdate();
+            JOptionPane.showMessageDialog(
+                    null,
+                    "PRODUTO: '" + nomeProduto.toUpperCase() + "' VENDIDO.",
+                    "SUCESSO",
+                    JOptionPane.INFORMATION_MESSAGE);
+        } catch (SQLException | NullPointerException e) {
+            JOptionPane.showMessageDialog(
+                    null,
+                    "NÃO FOI POSSÍVEL VENDER O PRODUTO.\n" + e.getMessage().toUpperCase(),
+                    "ERRO",
+                    JOptionPane.WARNING_MESSAGE);
+        } finally {
+            ConectaDAO.disconnectDB(conn,
+                    prep,
+                    resultset);
+        }
     }
 }
