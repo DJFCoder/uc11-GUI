@@ -128,14 +128,13 @@ public class ListagemVIEW extends javax.swing.JFrame {
 
     private void btnVenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVenderActionPerformed
         String id = id_produto_venda.getText();
-        ProdutosDAO produtosdao = new ProdutosDAO();
-        //produtosdao.venderProduto(Integer.parseInt(id));
+        ProdutosDAO.venderProduto(Integer.parseInt(id));
         listarProdutos();
     }//GEN-LAST:event_btnVenderActionPerformed
 
     private void btnVendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVendasActionPerformed
-        //vendasVIEW vendas = new vendasVIEW(); 
-        //vendas.setVisible(true);
+        new VendasVIEW().setVisible(true);
+        dispose();
     }//GEN-LAST:event_btnVendasActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
@@ -158,10 +157,9 @@ public class ListagemVIEW extends javax.swing.JFrame {
 
     private void listarProdutos() {
         try {
-            ProdutosDAO produtosdao = new ProdutosDAO();
             DefaultTableModel model = (DefaultTableModel) listaProdutos.getModel();
             model.setNumRows(0);
-            ArrayList<ProdutosDTO> listagem = produtosdao.listarProdutos();
+            ArrayList<ProdutosDTO> listagem = ProdutosDAO.listarProdutos();
             for (int i = 0; i < listagem.size(); i++) {
                 model.addRow(new Object[]{
                     listagem.get(i).getId(),
@@ -173,7 +171,7 @@ public class ListagemVIEW extends javax.swing.JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(
                     null,
-                    "CONNECTION ERROR: " + e.getMessage(),
+                    "ERROR: " + e.getMessage(),
                     "ERRO",
                     JOptionPane.WARNING_MESSAGE);
         }
