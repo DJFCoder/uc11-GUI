@@ -31,7 +31,7 @@ O Sistema de Leilões é uma aplicação desktop desenvolvida em Java que permit
 ### Build e Execução
 O projeto utiliza Ant para build. No NetBeans, você pode:
 - Clicar em "Limpar e Construir Projeto"
-- Executar a classe `cadastroVIEW` para iniciar a aplicação
+- Executar a classe `LeiloesTDSat` para iniciar a aplicação
 
 ---
 
