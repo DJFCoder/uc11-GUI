@@ -39,7 +39,7 @@ O projeto utiliza Ant para build. No NetBeans, você pode:
 - Linguagem: Java
 - Interface Gráfica: Swing
 - Banco de Dados: MySQL
-- Gerenciamento de Dependências: Maven
+- Gerenciamento de Dependências: Ant
 - IDE: NetBeans
 - Conector JDBC: MySQL Connector
 
