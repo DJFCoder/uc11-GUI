@@ -9,7 +9,7 @@ import javax.swing.JOptionPane;
  *
  * @author Adm
  */
-public class conectaDAO {
+public class ConectaDAO {
     private static Connection conn;
 
     protected static Connection connectDB() {
@@ -27,7 +27,7 @@ public class conectaDAO {
         return conn;
     }
 
-    protected static void discConnectDB() {
+    protected static void disconnectDB() {
         try {
             if (conn != null && !conn.isClosed()) {
                 conn.close();

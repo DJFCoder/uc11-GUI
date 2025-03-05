@@ -22,7 +22,7 @@ public class ProdutosDAO {
     public static void cadastrarProduto(ProdutosDTO produto) {
         conn = null;
         try {
-            conn = conectaDAO.connectDB();
+            conn = ConectaDAO.connectDB();
             prep = conn.prepareStatement(
                     "INSERT INTO produtos(nome, valor, status) VALUES(?,?,?)");
             prep.setString(1,
@@ -34,7 +34,7 @@ public class ProdutosDAO {
             prep.executeUpdate();
             JOptionPane.showMessageDialog(
                     null,
-                    "DADOS DO PRODUTO: " + produto.getNome() + " SALVOS COM SUCESSO.",
+                    "DADOS DO PRODUTO: " + produto.getNome().toUpperCase() + " SALVOS COM SUCESSO.",
                     "SUCESSO",
                     JOptionPane.INFORMATION_MESSAGE);
         } catch (HeadlessException | SQLException e) {
@@ -44,7 +44,7 @@ public class ProdutosDAO {
                     "ERRO",
                     JOptionPane.WARNING_MESSAGE);
         } finally {
-            conectaDAO.discConnectDB();
+            ConectaDAO.disconnectDB();
         }
     }
 
@@ -52,7 +52,7 @@ public class ProdutosDAO {
         listagem.clear();
         conn = null;
         try {
-            conn = conectaDAO.connectDB();
+            conn = ConectaDAO.connectDB();
             prep = conn.prepareStatement("SELECT * FROM produtos");
             resultset = prep.executeQuery();
             while (resultset.next()) {
@@ -71,7 +71,7 @@ public class ProdutosDAO {
                     JOptionPane.WARNING_MESSAGE);
             return new ArrayList<>();
         } finally {
-            conectaDAO.discConnectDB();
+            ConectaDAO.disconnectDB();
         }
         return listagem;
     }

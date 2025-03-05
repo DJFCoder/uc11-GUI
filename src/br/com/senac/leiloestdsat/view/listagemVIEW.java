@@ -10,8 +10,8 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Adm
  */
-public class listagemVIEW extends javax.swing.JFrame {
-    public listagemVIEW() {
+public class ListagemVIEW extends javax.swing.JFrame {
+    public ListagemVIEW() {
         initComponents();
         listarProdutos();
     }
@@ -139,7 +139,7 @@ public class listagemVIEW extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVendasActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
-        new cadastroVIEW().setVisible(true);
+        new CadastroVIEW().setVisible(true);
         dispose();
     }//GEN-LAST:event_btnVoltarActionPerformed
 

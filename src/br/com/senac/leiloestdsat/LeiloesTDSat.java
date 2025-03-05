@@ -1,6 +1,6 @@
 package br.com.senac.leiloestdsat;
 
-import br.com.senac.leiloestdsat.view.cadastroVIEW;
+import br.com.senac.leiloestdsat.view.CadastroVIEW;
 
 /**
  *
@@ -12,12 +12,12 @@ public class LeiloesTDSat {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    new cadastroVIEW().setVisible(true);
+                    new CadastroVIEW().setVisible(true);
                     break;
                 }
             }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(cadastroVIEW.class.getName()).log(
+            java.util.logging.Logger.getLogger(CadastroVIEW.class.getName()).log(
                     java.util.logging.Level.SEVERE,
                     null,
                     ex);
